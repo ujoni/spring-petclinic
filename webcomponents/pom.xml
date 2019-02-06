@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.samples</groupId>
+        <artifactId>spring-petclinic-parent</artifactId>
+        <version>2.1.0.BUILD-SNAPSHOT</version>
+    </parent>
+    <artifactId>petclinic-webcomponent</artifactId>
+    <name>petclinic</name>
+
+    <properties>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>vaadin-prereleases</id>
+            <url>https://maven.vaadin.com/vaadin-prereleases</url>
+        </repository>
+        <repository>
+            <id>vaadin-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.webjars.bowergithub.polymer</groupId>
+            <artifactId>polymer</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-server</artifactId>
+            <version>1.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-client</artifactId>
+            <version>1.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>flow-data</artifactId>
+            <version>1.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
+
