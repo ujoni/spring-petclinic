@@ -4,30 +4,10 @@
 <body>
 
   <h2>Owner</h2>
-  <form th:object="${owner}" class="form-horizontal" id="add-owner-form" method="post">
-    <div class="form-group has-feedback">
-      <input
-        th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}" />
-      <input
-        th:replace="~{fragments/inputField :: input ('Last Name', 'lastName', 'text')}" />
-      <input
-        th:replace="~{fragments/inputField :: input ('Address', 'address', 'text')}" />
-      <input
-        th:replace="~{fragments/inputField :: input ('City', 'city', 'text')}" />
-      <input
-        th:replace="~{fragments/inputField :: input ('Telephone', 'telephone', 'text')}" />
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button
-          th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
-          class="btn btn-default" type="submit" th:text="${text}">Add
-          Owner</button>
-      </div>
-    </div>
-  </form>
   
-  <owner-form></owner-form>
+  <owner-form style="display: grid;" 
+    th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'" 
+    th:attr="actionname=${text},owner=${owner.id}" ></owner-form>
   
 </body>
 </html>

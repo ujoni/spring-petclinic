@@ -16,6 +16,7 @@
   <packaging>pom</packaging>
   
   <modules>
+    <module>backend</module>
     <module>petclinic</module>
     <module>webcomponents</module>
   </modules>

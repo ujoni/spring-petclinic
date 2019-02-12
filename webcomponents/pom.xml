@@ -10,7 +10,7 @@
         <version>2.1.0.BUILD-SNAPSHOT</version>
     </parent>
     <artifactId>petclinic-webcomponent</artifactId>
-    <name>petclinic</name>
+    <name>Vaadin embedded Web Components</name>
 
     <properties>
     </properties>
@@ -34,6 +34,11 @@
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring</artifactId>
+            <version>11.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
             <artifactId>flow-server</artifactId>
             <version>1.4-SNAPSHOT</version>
         </dependency>
@@ -50,6 +55,33 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-form-layout-flow</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-text-field-flow</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-button-flow</artifactId>
+            <version>1.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-lumo-theme</artifactId>
+            <version>1.4-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.samples</groupId>
+            <artifactId>petclinic-backend</artifactId>
+            <version>2.1.0.BUILD-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

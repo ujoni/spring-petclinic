@@ -16,23 +16,16 @@
 
 package org.springframework.samples.petclinic;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.samples.webcomponent.VaadinServletContextInitializer;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.vaadin.flow.server.VaadinServlet;
+import com.vaadin.flow.spring.annotation.EnableVaadin;
 
 /**
  * PetClinic Spring Boot Application.
@@ -42,48 +35,22 @@ import com.vaadin.flow.server.VaadinServlet;
  */
 @SpringBootApplication
 @Configuration
+@EnableVaadin("org.springframework.samples.webcomponent")
 public class PetClinicApplication {
 
     @Autowired
     private WebApplicationContext context;
-
-    private static class VaadinServletWithNonRootFrontendHandler
-            extends VaadinServlet {
-
-        @Override
-        protected void service(HttpServletRequest request,
-                HttpServletResponse response)
-                throws ServletException, IOException {
-            String servletPath = request.getServletPath();
-            String pathInfo = request.getPathInfo();
-
-            String queryString = request.getQueryString();
-
-            if ("/vaadin".equals(servletPath)
-                    && pathInfo.startsWith("/frontend/bower_components/")
-                    && queryString == null) {
-                response.sendRedirect(pathInfo);
-            }
-            super.service(request, response);
-        }
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(PetClinicApplication.class, args);
     }
 
     @Bean
-    public ServletRegistrationBean<VaadinServlet> servletRegistrationBean() {
+    public ServletRegistrationBean<VaadinServlet> frontendResourcesRegistrationBean() {
         ServletRegistrationBean<VaadinServlet> registration = new ServletRegistrationBean<>(
-                new VaadinServletWithNonRootFrontendHandler(), "/vaadin/*",
-                "/frontend/*");
+                new VaadinServlet(), "/frontend/*");
         registration.setAsyncSupported(true);
         return registration;
-    }
-
-    @Bean
-    public ServletContextInitializer contextInitializer() {
-        return new VaadinServletContextInitializer(context);
     }
 
 }
