@@ -7,7 +7,7 @@
   
   <owner-form style="display: grid;" 
     th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'" 
-    th:attr="actionname=${text},owner=${owner.id}" ></owner-form>
+    th:attr="action-name=${text},owner=${owner.id}" ></owner-form>
   
 </body>
 </html>
