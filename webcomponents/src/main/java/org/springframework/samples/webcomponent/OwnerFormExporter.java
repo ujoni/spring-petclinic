@@ -17,7 +17,10 @@ package org.springframework.samples.webcomponent;
 
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.WebComponentExporter;
+import com.vaadin.flow.component.webcomponent.WebComponent;
 import com.vaadin.flow.component.webcomponent.WebComponentDefinition;
+
+import elemental.json.Json;
 
 @Tag("owner-form")
 public class OwnerFormExporter implements WebComponentExporter<OwnerForm> {
@@ -27,6 +30,14 @@ public class OwnerFormExporter implements WebComponentExporter<OwnerForm> {
         definition.addProperty("actionName", "")
                 .onChange(OwnerForm::setActionName);
         definition.addProperty("owner", -1).onChange(OwnerForm::setOwner);
+
+        definition.setInstanceConfigurator(this::initialize);
+    }
+
+    private void initialize(WebComponent<OwnerForm> webComponent,
+            OwnerForm component) {
+        component.addSaveListener(
+                id -> webComponent.fireEvent("save-owner", Json.create(id)));
     }
 
 }

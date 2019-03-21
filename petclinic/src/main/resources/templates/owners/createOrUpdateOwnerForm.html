@@ -3,11 +3,18 @@
 
 <body>
 
+    <script type="text/javascript">
+        var editor = document.querySelector("#editor");
+        editor.addEventListener("save-owner" , function(event){
+            window.location.href='/owners/'+event.detail;
+        });
+    </script>
+
   <h2>Owner</h2>
   
   <owner-form style="display: grid;" 
     th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'" 
-    th:attr="action-name=${text},owner=${owner.id}" ></owner-form>
+    th:attr="action-name=${text},owner=${owner.id}" id="editor"></owner-form>
   
 </body>
 </html>

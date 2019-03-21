@@ -27,6 +27,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.StatusChangeEvent;
+import com.vaadin.flow.function.SerializableConsumer;
 
 public class OwnerForm extends Div {
 
@@ -89,11 +90,13 @@ public class OwnerForm extends Div {
         binder.setBean(ownerBean);
     }
 
+    public void addSaveListener(SerializableConsumer<Integer> saveListener) {
+        getSaveButton().addClickListener(
+                event -> saveListener.accept(binder.getBean().getId()));
+    }
+
     private void save(Binder<Owner> binder) {
-        Owner owner = binder.getBean();
-        repository.save(owner);
-        getUI().get().getPage().executeJavaScript(
-                "window.location.href='/owners/" + owner.getId() + "';");
+        repository.save(binder.getBean());
     }
 
     private void onStatusUpdate(StatusChangeEvent event) {
