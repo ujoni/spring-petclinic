@@ -30,11 +30,10 @@ public class OwnerFormExporter implements WebComponentExporter<OwnerForm> {
         definition.addProperty("actionName", "")
                 .onChange(OwnerForm::setActionName);
         definition.addProperty("owner", -1).onChange(OwnerForm::setOwner);
-
-        definition.setInstanceConfigurator(this::initialize);
     }
 
-    private void initialize(WebComponent<OwnerForm> webComponent,
+    @Override
+    public void configure(WebComponent<OwnerForm> webComponent,
             OwnerForm component) {
         component.addSaveListener(
                 id -> webComponent.fireEvent("save-owner", Json.create(id)));
