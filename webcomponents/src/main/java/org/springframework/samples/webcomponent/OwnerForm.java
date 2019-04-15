@@ -15,6 +15,9 @@
  */
 package org.springframework.samples.webcomponent;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.OwnerRepository;
@@ -37,7 +40,9 @@ public class OwnerForm extends Div {
     private Button saveButton;
 
     private BeanValidationBinder<Owner> binder = new BeanValidationBinder<>(
-            Owner.class);
+        Owner.class);
+
+    private Set<SerializableConsumer<Integer>> listeners = new HashSet<>();
 
     @Override
     protected void onAttach(AttachEvent attachEvent) {
@@ -75,10 +80,22 @@ public class OwnerForm extends Div {
         add(layout, saveButton);
     }
 
+    /**
+     * Sets the name of the form action. The name will be displayed on the
+     * form's submit button.
+     *
+     * @param name  test to display on the button
+     */
     public void setActionName(String name) {
         getSaveButton().setText(name);
     }
 
+    /**
+     * Sets the id of the owner to display. If the provided {@code ownerId}
+     * is {@code -1}, the form creates a new user to be filled out.
+     *
+     * @param ownerId   id of the owner bean
+     */
     public void setOwner(Integer ownerId) {
         if (ownerId == -1) {
             return;
@@ -90,13 +107,21 @@ public class OwnerForm extends Div {
         binder.setBean(ownerBean);
     }
 
+    /**
+     * Adds a save event listener. When form's button is clicked, all the
+     * registered listeners will be invoked with the id of the owner that was
+     * saved.
+     *
+     * @param saveListener  integer consumer
+     */
     public void addSaveListener(SerializableConsumer<Integer> saveListener) {
-        getSaveButton().addClickListener(
-                event -> saveListener.accept(binder.getBean().getId()));
+        listeners.add(saveListener);
     }
 
     private void save(Binder<Owner> binder) {
         repository.save(binder.getBean());
+
+        listeners.forEach(listener -> listener.accept(binder.getBean().getId()));
     }
 
     private void onStatusUpdate(StatusChangeEvent event) {
