@@ -48,7 +48,7 @@ public class PetClinicApplication {
     @Bean
     public ServletRegistrationBean<VaadinServlet> frontendResourcesRegistrationBean() {
         ServletRegistrationBean<VaadinServlet> registration = new ServletRegistrationBean<>(
-                new VaadinServlet(), "/frontend/*");
+                new VaadinServlet(), "/frontend/*", "/vaadin/*");
         registration.setAsyncSupported(true);
         return registration;
     }
